@@ -197,6 +197,7 @@ def juego(NumeroNivel):
                 elif minum == 5 :
                     b = Bloque([j*64,i*64],Bloque4)
                     bloques.add(b)
+
                 if i==0 and j ==0:
                     l = LimClass(j*64,i*64)
                     lim.add(l)
