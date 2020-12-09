@@ -244,6 +244,7 @@ def juego(NumeroNivel):
             escaleras.update(temp)
             gemas.update(temp)
             lim.update(temp)
+            print(jugador.contGravedad)
 
 
 

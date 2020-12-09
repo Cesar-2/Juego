@@ -1,5 +1,5 @@
 import pygame
-
+import Bala
 widht = 800
 height = 600
 velocidad = 10
@@ -16,7 +16,6 @@ class Jugador(pygame.sprite.Sprite):
         self.hoja.set_clip(pygame.Rect(10*2, 5*2, 37*2, 46*2))
         self.imagen = self.hoja.subsurface(self.hoja.get_clip())
         self.rect = self.imagen.get_rect()
-        #self.rect.topleft = posicion
         self.rect.x = posicion[0]
         self.rect.y = posicion[1]
         self.figura = 0
@@ -38,7 +37,12 @@ class Jugador(pygame.sprite.Sprite):
         self.max_health = 100
         self.health = 100
 
-
+    def shoot(self):
+        if self.derecha:
+            bala = Bala([self.rect.x+self.rect.width, self.rect.y + self.rect.height/2])
+        if self.izquierda:
+            bala = Bala([self.rect.x-self.rect.width, self.rect.y + self.rect.height/2])
+        return bala
     def get_figura(self,estados):
         self.figura += 1
         if self.figura > (len(estados) - 1):
@@ -118,12 +122,16 @@ class Jugador(pygame.sprite.Sprite):
                     if self.bajar:
                         self.bajando = True
 
-            if event.key == 1073742048:
-                if self.contGravedad == 2:
+            if event.key == pygame.K_LCTRL:
+                if not self.salto:
                     self.salto = True
                     self.actualizacion ('salto')
                     self.contGravedad = -7
                     jDesplazamientoY = -28
+
+            if event.key == pygame.K_LSHIFT:
+                self.shoot()
+                 
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
