@@ -1,10 +1,13 @@
 import pygame
-import Bala
+from Bala import *
 widht = 800
 height = 600
 velocidad = 10
 velocidadSalto = 28
 gravedad = 4
+
+
+
 class Jugador(pygame.sprite.Sprite):
     def __init__(self,posicion):
         pygame.sprite.Sprite.__init__(self)
@@ -39,10 +42,11 @@ class Jugador(pygame.sprite.Sprite):
 
     def shoot(self):
         if self.derecha:
-            bala = Bala([self.rect.x+self.rect.width, self.rect.y + self.rect.height/2])
+            bala = Bala([self.rect.x, self.rect.y],-20)
         if self.izquierda:
-            bala = Bala([self.rect.x-self.rect.width, self.rect.y + self.rect.height/2])
+            bala = Bala([self.rect.x, self.rect.y],+20)
         return bala
+    
     def get_figura(self,estados):
         self.figura += 1
         if self.figura > (len(estados) - 1):
@@ -128,9 +132,6 @@ class Jugador(pygame.sprite.Sprite):
                     self.actualizacion ('salto')
                     self.contGravedad = -7
                     jDesplazamientoY = -28
-
-            if event.key == pygame.K_LSHIFT:
-                self.shoot()
                  
 
         if event.type == pygame.KEYUP:

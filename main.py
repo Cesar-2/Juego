@@ -9,6 +9,7 @@ from Escalera import *
 from Bloque import *
 from Gema import *
 from Nivel1 import *
+from Bala import *
 
 intro = True
 

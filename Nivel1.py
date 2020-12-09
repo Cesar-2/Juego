@@ -121,6 +121,7 @@ def juego(NumeroNivel):
     bloques = pygame.sprite.Group()
     enemigos = pygame.sprite.Group()
     lim = pygame.sprite.Group()
+    balas = pygame.sprite.Group()
 
     musica = 0
     tiempoInicial = pygame.time.get_ticks()
@@ -208,6 +209,7 @@ def juego(NumeroNivel):
         escaleras.update(temp1)
         gemas.update(temp1)
         lim.update(temp1)
+        balas.update(temp1)
 
         tiempoInicioNivel = pygame.time.get_ticks() - tiempoInicial
 
@@ -220,6 +222,10 @@ def juego(NumeroNivel):
                     game_over = True
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        bala = jugador.shoot()
+                        balas.add(bala)
+
                     if event.key == pygame.K_ESCAPE:
                         gemas.empty()
 
@@ -244,7 +250,7 @@ def juego(NumeroNivel):
             escaleras.update(temp)
             gemas.update(temp)
             lim.update(temp)
-            print(jugador.contGravedad)
+            balas.update(temp)
 
 
 
@@ -261,6 +267,7 @@ def juego(NumeroNivel):
                     escaleras.update(temp)
                     gemas.update(temp)
                     lim.update(temp)
+                    balas.update(temp)
                     jugador.contGravedad = 0
                     break
                 if jugador.rect.bottom > e.rect.top and temp[1] > 0 and not jugador.bajando:
@@ -270,6 +277,7 @@ def juego(NumeroNivel):
                     escaleras.update(temp)
                     gemas.update(temp)
                     lim.update(temp)
+                    balas.update(temp)
                     jugador.salto = False
                     break
 
@@ -281,6 +289,7 @@ def juego(NumeroNivel):
                     escaleras.update(temp)
                     gemas.update(temp)
                     lim.update(temp)
+                    balas.update(temp)
                     break
                 elif jugador.rect.left < e.rect.right and temp[0] < 0:
                     temp = [(e.rect.right-jugador.rect.left),0]
@@ -288,8 +297,17 @@ def juego(NumeroNivel):
                     escaleras.update(temp)
                     gemas.update(temp)
                     lim.update(temp)
+                    balas.update(temp)
                     break
+            
+            for b in bloques:
+                ls = pygame.sprite.spritecollide(b,balas,True)
 
+            for b in balas:
+                if b.rect.x < 0 or b.rect.x > 1200:
+                    balas.remove(b)
+                    
+            print(len(balas))
 
             totalGemas = 0
 
@@ -307,6 +325,8 @@ def juego(NumeroNivel):
                 screen.blit(e.image,e.rect)
             for g in gemas :
                 screen.blit(g.image,g.rect)
+            for b in balas:
+                screen.blit(b.image,b.rect)
             screen.blit(jugador.imagen,jugador.rect)
             jugador.healthbar(screen)
             pygame.draw.rect(screen,white,(1000,3,200,50))
@@ -344,6 +364,7 @@ def juego(NumeroNivel):
                 gemas.empty()
                 enemigos.empty()
                 lim.empty()
+                balas.empty()
                 musica.stop()
                 break
                 #sys.exit()
