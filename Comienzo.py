@@ -6,6 +6,8 @@ import sys
 RESOLUTION = [1200,600]
 AZUL = (0,0,255)
 BLANCO = (255,255,255)
+YELLOW = (255,233,0)
+RED = (255,0,0)
 pygame.init()
 ventana = pygame.display.set_mode(RESOLUTION)
 pygame.display.set_caption("JUEGO")
@@ -42,6 +44,3 @@ def Cinematica1():
     pygame.display.flip()
     pygame.time.wait(10000)
     audio.stop()
-    
-    
-    #pygame.display.update()

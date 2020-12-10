@@ -114,6 +114,7 @@ def juego(NumeroNivel):
     sonidoMuerte = pygame.mixer.Sound("Muerte.wav")
     sonidoWin = pygame.mixer.Sound("victory.wav")
     sonidoLose = pygame.mixer.Sound("GameOver.wav")
+    sonidoBala = pygame.mixer.Sound("bala.mp3")
 
     jugadores = pygame.sprite.Group()
     gemas = pygame.sprite.Group()
@@ -133,9 +134,6 @@ def juego(NumeroNivel):
         jugador = Jugador([ANCHO/2, ALTO/2])
         desplazamientoX = 0
         desplazamientoY = 0
-
-
-
         screen.fill([255,255,255])
     #------------------------------------------------------------------------------------------
         if nivel == 1:
@@ -226,7 +224,7 @@ def juego(NumeroNivel):
                     if event.key == pygame.K_SPACE:
                         bala = jugador.shoot()
                         balas.add(bala)
-
+                        sonidoBala.play()
                     if event.key == pygame.K_ESCAPE:
                         gemas.empty()
 
@@ -253,12 +251,9 @@ def juego(NumeroNivel):
             lim.update(temp)
             balas.update(temp)
 
-
-
             ls = pygame.sprite.spritecollide(jugador,escaleras,False)
             if len(ls) > 0 :
                 jugador.escalar = True
-
 
             ls = pygame.sprite.spritecollide(jugador,bloques,False)
             for e in ls:
@@ -368,7 +363,6 @@ def juego(NumeroNivel):
                 balas.empty()
                 musica.stop()
                 break
-                #sys.exit()
 
     #----------------------------------------------------------------------------------------
     screen.fill([255,255,255])

@@ -6,8 +6,6 @@ velocidad = 10
 velocidadSalto = 28
 gravedad = 4
 
-
-
 class Jugador(pygame.sprite.Sprite):
     def __init__(self,posicion):
         pygame.sprite.Sprite.__init__(self)
