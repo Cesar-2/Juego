@@ -10,7 +10,7 @@ BOOM6 = pygame.image.load("explosion6.png")
 BOOM7 = pygame.image.load("explosion7.png")
 
 class Explo(pygame.sprite.Sprite):
-    def __init__(self,posicion,image) :
+    def __init__(self,posicion) :
         pygame.sprite.Sprite.__init__(self)
         self.accion = 0
         self.imagenes = [BOOM1,BOOM2,BOOM3,BOOM4,BOOM5,BOOM6,BOOM7]
@@ -19,15 +19,16 @@ class Explo(pygame.sprite.Sprite):
         self.rect.x = posicion[0]
         self.rect.y = posicion[1]
         self.animacion = 0
-
+        self.terminar = False
+    
     def update(self,mov) :
         self.rect.x -= mov[0]
         self.rect.y -= mov[1]
-        if self.animacion == 3:
-            if self.accion == 6:
-                self.accion = 0
-            else:
+        if self.animacion == 1:
+            if self.accion != 6:
                 self.accion += 1
+            else:
+                self.terminar = True
             self.animacion = 0
         else:
             self.animacion += 1
