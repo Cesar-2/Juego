@@ -20,14 +20,14 @@ def text_objects(text, font):
 
 def game_intro():
     pygame.init()
-    screen = pygame.display.set_mode((290, 464))
+    screen = pygame.display.set_mode((1200, 600))
     while intro:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
 
-        imagen = pygame.image.load("jewel.jpg")
+        imagen = pygame.image.load(os.path.join("IMG","menu1.png"))
         screen.blit(imagen,(0,0))
         NumeroNivel = 1
         button("Play",290/2 - 60 ,464/2, 125,60, green, greenSelected, NumeroNivel, juego)
@@ -45,7 +45,7 @@ def tutorial(NumeroNivel):
                 quit()
 
         screen = pygame.display.set_mode((1200, 600))
-        tuto = pygame.image.load("Tutorial.png")
+        tuto = pygame.image.load(os.path.join("IMG","Tutorial.png"))
         screen.blit(tuto,(0,0))
         button("Start",1000 ,400, 125,60, green, greenSelected,1, juego)
         pygame.display.update()

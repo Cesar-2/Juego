@@ -5,6 +5,7 @@ import json
 import csv
 import gzip
 from Jugador import *
+from nudo import *
 from Escalera import *
 from Bloque import *
 from Gema import *
@@ -77,6 +78,7 @@ def cut (img, rectangle):
 def nivel2():
     #pygame.quit()
     screen = pygame.display.set_mode((1200, 1000))
+    Cinematica2()
     pygame.display.set_caption("sprite")
     reloj = pygame.time.Clock()
     game_over = False
