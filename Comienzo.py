@@ -24,7 +24,7 @@ miTexto5 = miFuente2.render("AQUI COMIENZA SU AVENTURA!!!",0,BLANCO)
  
 #fin = False
 def Cinematica1():
-    audio.play()
+    '''audio.play()
     ventana.blit(fondo,(0,0))
     pygame.display.flip()
     pygame.time.wait(2000)
@@ -43,4 +43,4 @@ def Cinematica1():
     ventana.blit(miTexto5,(665,130))
     pygame.display.flip()
     pygame.time.wait(10000)
-    audio.stop()
+    audio.stop()'''

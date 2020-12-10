@@ -393,6 +393,13 @@ def juego(NumeroNivel):
                 sonidoExplo.play()
                 explo = Explo([jugador.rect.x,jugador.rect.y])
                 explos.add(explo)
+
+            for e in robots:
+                ls = pygame.sprite.spritecollide(e,bloques,False)
+                for f in ls:
+                    if e.rect.bottom > f.rect.top :
+                        e.rect.bottom = f.rect.top
+                        break
                     
             for b in bloques :
                 screen.blit(b.image,b.rect)
