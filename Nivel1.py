@@ -152,14 +152,11 @@ def juego(NumeroNivel):
             pygame.display.flip()
             pygame.time.wait(2000)
         if nivel == 2:
-            uploadMap("jefe2")
+            uploadMap("jefe1")
             musica = pygame.mixer.Sound("Musica3.wav")
             desplazamientoX = -100
             desplazamientoY = 3630
-            info = imgNivel3.get_size()
-            screen.blit(imgNivel3,[(ANCHO/2)-(info[0]/2),(ALTO/2)-(info[1]/2)])
             pygame.display.flip()
-            pygame.time.wait(2000)
         if nivel == 3:
             uploadMap("mapa2")
             musica = pygame.mixer.Sound("Musica2.wav")
@@ -174,10 +171,6 @@ def juego(NumeroNivel):
             musica = pygame.mixer.Sound("Musica3.wav")
             desplazamientoX = -100
             desplazamientoY = 3630
-            info = imgNivel3.get_size()
-            screen.blit(imgNivel3,[(ANCHO/2)-(info[0]/2),(ALTO/2)-(info[1]/2)])
-            pygame.display.flip()
-            pygame.time.wait(2000)
     #---------------------------------------------------------------------------------------------
 
         musica.play(10)
@@ -356,7 +349,7 @@ def juego(NumeroNivel):
                     explos.update(temp)
                     robots.update(temp)
                     break
-            
+  
             for b in bloques:
                 ls = pygame.sprite.spritecollide(b,balas,True)
 
