@@ -143,6 +143,7 @@ def juego(NumeroNivel):
         screen.fill([255,255,255])
     #------------------------------------------------------------------------------------------
         if nivel == 1:
+            
             uploadMap("mapa1")
             musica = pygame.mixer.Sound("Musica1.wav")
             desplazamientoX = 100
@@ -151,6 +152,7 @@ def juego(NumeroNivel):
             screen.blit(imgNivel1,[(ANCHO/2)-(info[0]/2),(ALTO/2)-(info[1]/2)])
             pygame.display.flip()
             pygame.time.wait(2000)
+
         if nivel == 2:
             uploadMap("jefe2")
             musica = pygame.mixer.Sound("Musica3.wav")
@@ -160,6 +162,7 @@ def juego(NumeroNivel):
             screen.blit(imgNivel3,[(ANCHO/2)-(info[0]/2),(ALTO/2)-(info[1]/2)])
             pygame.display.flip()
             pygame.time.wait(2000)
+
         if nivel == 3:
             uploadMap("mapa2")
             musica = pygame.mixer.Sound("Musica2.wav")
@@ -169,6 +172,7 @@ def juego(NumeroNivel):
             screen.blit(imgNivel2,[(ANCHO/2)-(info[0]/2),(ALTO/2)-(info[1]/2)])
             pygame.display.flip()
             pygame.time.wait(2000)
+            
         if nivel == 4:
             uploadMap("jefe2")
             musica = pygame.mixer.Sound("Musica3.wav")
@@ -186,7 +190,7 @@ def juego(NumeroNivel):
         for i in range(mapHeight):
             for j in range(mapWidth):
                 minum = matrizMap[i][j]
-                if minum == 1 :
+                if minum == 1:
                     b = Bloque([j*64,i*64],Bloque1)
                     bloques.add(b)
                 elif minum == 2 :
