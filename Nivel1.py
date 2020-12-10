@@ -307,8 +307,7 @@ def juego(NumeroNivel):
             for b in balas:
                 if b.rect.x < 0 or b.rect.x > 1200:
                     balas.remove(b)
-                    
-            print(len(balas))
+                print(b.rect.y,jugador.rect.bottom)
 
             totalGemas = 0
 
