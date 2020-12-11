@@ -15,12 +15,13 @@ class Robot(pygame.sprite.Sprite):
         self.rect.x = posicion[0]
         self.rect.y = posicion[1]
         self.animacion = 0
+        self.voltear = 10
         self.velx = vel
 
     
     def update(self, mov):
         self.rect.x -= mov[0] + self.velx
-        self.rect.y -= mov[1] - Constantes.gravedad *2
+        self.rect.y -= mov[1] - Constantes.gravedad 
         if self.animacion == 1:
             if self.accion != 2:
                 self.accion += 1
@@ -29,4 +30,9 @@ class Robot(pygame.sprite.Sprite):
             self.animacion = 0
         else:
             self.animacion += 1
+        if self.voltear == 0:
+            self.velx = - self.velx
+            self.voltear = 10
+        else:
+            self.voltear -= 1
         self.image = self.imagenes[self.accion]

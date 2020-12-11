@@ -7,7 +7,7 @@ ROBOT1 = pygame.image.load(os.path.join("Enemigo_Robot_Volador","RobotV1.png"))
 ROBOT2 = pygame.image.load(os.path.join("Enemigo_Robot_Volador","RobotV2.png"))
 ROBOT3 = pygame.image.load(os.path.join("Enemigo_Robot_Volador","RobotV3.png"))
 
-class Robot(pygame.sprite.Sprite):
+class RobotVV(pygame.sprite.Sprite):
     def __init__(self,posicion,vel) :
         pygame.sprite.Sprite.__init__(self)
         self.accion = 0
