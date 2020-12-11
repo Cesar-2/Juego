@@ -16,6 +16,7 @@ import sys
 from pygame.locals import *
 from Explo import *
 from Robot import *
+from Boss1 import *
 
 width=100
 height=720
@@ -131,6 +132,10 @@ def juego(NumeroNivel):
     minas = pygame.sprite.Group()
     explos = pygame.sprite.Group()
     robots = pygame.sprite.Group()
+
+
+    bosses = pygame.sprite.Group() # Creacion del boss 1
+
     musica = 0
     tiempoInicial = pygame.time.get_ticks()
     perdio = False
@@ -223,6 +228,12 @@ def juego(NumeroNivel):
                 elif minum == 40:
                     r = Robot([j*64,i*64],20)
                     robots.add(r)
+
+                elif minum == 42: # jefe 1
+                    bs1 = Boss1([j*64,i*64])
+                    bosses.add(bs1)
+                #elif minum == 43: # jefe 2
+
                 elif i==0 and j ==0:
                     l = LimClass(j*64,i*64)
                     lim.add(l)
@@ -245,6 +256,7 @@ def juego(NumeroNivel):
         minas.update(temp1)
         explos.update(temp1)
         robots.update(temp1)
+        bosses.update(temp1)
 
         tiempoInicioNivel = pygame.time.get_ticks() - tiempoInicial
         cont = 0
