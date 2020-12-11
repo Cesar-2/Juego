@@ -162,6 +162,8 @@ def juego(NumeroNivel):
             musica = pygame.mixer.Sound("Musica2.wav")
             desplazamientoX = 100
             desplazamientoY = 1300
+            info = imgNivel2.get_size()
+            screen.blit(imgNivel2,[(ANCHO/2)-(info[0]/2),(ALTO/2)-(info[1]/2)])
             pygame.display.flip()
             pygame.time.wait(2000)
         
@@ -171,7 +173,7 @@ def juego(NumeroNivel):
             desplazamientoX = 100
             desplazamientoY = 1300
             info = imgNivel2.get_size()
-            screen.blit(imgNivel2,[(ANCHO/2)-(info[0]/2),(ALTO/2)-(info[1]/2)])
+            screen.blit(imgNivel3,[(ANCHO/2)-(info[0]/2),(ALTO/2)-(info[1]/2)])
             pygame.display.flip()
             pygame.time.wait(2000)
             
@@ -380,6 +382,23 @@ def juego(NumeroNivel):
             for e in ls:
                 if jugador.rect.left > e.rect.right:
                     jugador.health-=5
+                    temp = [100,0]
+                    jugador.update(temp)
+                    bloques.update(temp)
+                    escaleras.update(temp)
+                    gemas.update(temp)
+                    lim.update(temp)
+                    balas.update(temp)
+                    turrets.update(temp,jugador.rect.x)
+                    balas_enemies.update(temp)
+                    minas.update(temp)
+                    explos.update(temp)
+                    robots.update(temp)
+                    abejas.update(temp,jugador.rect)
+                    bosses.update(temp)
+                    break
+                elif jugador.rect.right > e.rect.left:
+                    jugador.health-=5
                     temp = [-100,0]
                     jugador.update(temp)
                     bloques.update(temp)
@@ -395,9 +414,29 @@ def juego(NumeroNivel):
                     abejas.update(temp,jugador.rect)
                     bosses.update(temp)
                     break
-                elif jugador.rect.left < e.rect.right:
-                    jugador.health-=5
+            
+            ls = pygame.sprite.spritecollide(jugador,bosses,False)
+            for e in ls:
+                if jugador.rect.left > e.rect.right:
+                    jugador.health-=20
                     temp = [100,0]
+                    jugador.update(temp)
+                    bloques.update(temp)
+                    escaleras.update(temp)
+                    gemas.update(temp)
+                    lim.update(temp)
+                    balas.update(temp)
+                    turrets.update(temp,jugador.rect.x)
+                    balas_enemies.update(temp)
+                    minas.update(temp)
+                    explos.update(temp)
+                    robots.update(temp)
+                    abejas.update(temp,jugador.rect)
+                    bosses.update(temp)
+                    break
+                elif jugador.rect.right > e.rect.left:
+                    jugador.health-=20
+                    temp = [-100,0]
                     jugador.update(temp)
                     bloques.update(temp)
                     escaleras.update(temp)
@@ -439,7 +478,15 @@ def juego(NumeroNivel):
                     explo = Explo([a.rect.x-70,a.rect.y-70])
                     explos.add(explo)
                     abejas.remove(a)
-
+            for bo in bosses:
+                ls = pygame.sprite.spritecollide(bo,balas,True)
+                if ls:
+                    bo.health -= 50
+                    sonidoExplo.play()
+                    explo = Explo([bo.rect.x-70,bo.rect.y-70])
+                    explos.add(explo)
+                    if bo.health <= 0:
+                        abejas.remove(bo)
             totalGemas = 0
 
             ls = pygame.sprite.spritecollide(jugador,gemas,True)
@@ -470,7 +517,7 @@ def juego(NumeroNivel):
             for m in ls:
                 jugador.health -= 30
                 sonidoExplo.play()
-                explo = Explo([jugador.rect.x,jugador.rect.y])
+                explo = Explo([jugador.rect.x-70,jugador.rect.y-70])
                 explos.add(explo)
 
             for e in robots:
@@ -528,7 +575,7 @@ def juego(NumeroNivel):
                 sonidoMuerte.play()
                 pygame.time.wait(1500)
 
-            if l.y <-2000:
+            if l.y <-1500:
                 game_over = True
                 perdio = True
                 musica.stop()
@@ -560,6 +607,7 @@ def juego(NumeroNivel):
                 explos.empty()
                 robots.empty()
                 abejas.empty()
+                bosses.empty()
                 break
 
     #----------------------------------------------------------------------------------------
