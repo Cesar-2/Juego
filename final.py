@@ -71,12 +71,3 @@ def Cinematica3():
     ventana.blit(miTexto10,(1000,500))
     pygame.display.flip()
 
-fin = False
-
-
-Cinematica3()
-while not fin:
-    
-    for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                fin = True

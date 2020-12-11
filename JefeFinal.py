@@ -8,15 +8,15 @@ class JefeFinal(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.accion = 0
         self.imagenesDerecha = [pygame.image.load("Ozarnus_Der/Kirby.png"), pygame.image.load("Ozarnus_Der/Kirby1.png"), pygame.image.load("Ozarnus_Der/Kirby2.png"), pygame.image.load(
-            "Ozarnus_Der/Kirby3.png"), pygame.image.load("Ozarnus_Der/Kirby4.png"), pygame.image.load("Ozarnus_Der/Kirb5.png"), pygame.image.load("Ozarnus_Der/Kirby6.png"), pygame.image.load("Ozarnus_Der/Kirby7.png")]
+            "Ozarnus_Der/Kirby3.png"), pygame.image.load("Ozarnus_Der/Kirby4.png"), pygame.image.load("Ozarnus_Der/Kirby5.png"), pygame.image.load("Ozarnus_Der/Kirby6.png"), pygame.image.load("Ozarnus_Der/Kirby7.png")]
         self.imagenesIzquierda = [pygame.image.load("Ozarnus_Izq/Kirby.png"), pygame.image.load("Ozarnus_Izq/Kirby1.png"), pygame.image.load("Ozarnus_Izq/Kirby2.png"), pygame.image.load(
-            "Ozarnus_Izq/Kirby3.png"), pygame.image.load("Ozarnus_Izq/Kirby4.png"), pygame.image.load("Ozarnus_Izq/Kirb5.png"), pygame.image.load("Ozarnus_Izq/Kirby6.png"), pygame.image.load("Ozarnus_Izq/Kirby7.png")]
+            "Ozarnus_Izq/Kirby3.png"), pygame.image.load("Ozarnus_Izq/Kirby4.png"), pygame.image.load("Ozarnus_Izq/Kirby5.png"), pygame.image.load("Ozarnus_Izq/Kirby6.png"), pygame.image.load("Ozarnus_Izq/Kirby7.png")]
         self.image = self.imagenesIzquierda[self.accion]
         self.rect = self.image.get_rect()
         self.rect.x = posicion[0]
         self.rect.y = posicion[1]
-        self.max_health = 1000
-        self.health = 1000
+        self.max_health = 50
+        self.health = 50
         self.direction = 0
         self.animacion = 0
 

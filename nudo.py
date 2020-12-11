@@ -69,10 +69,3 @@ def Cinematica2():
     pygame.time.wait(6000)
     audio2.stop()
     
-Cinematica2()
-
-while not fin:
-    
-    for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                fin = True

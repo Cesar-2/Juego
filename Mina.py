@@ -16,7 +16,7 @@ class Mina(pygame.sprite.Sprite):
 
     def update(self, mov):
         self.rect.x -= mov[0]
-        self.rect.y -= mov[1]
+        self.rect.y -= mov[1] - Constantes.gravedad*2 
         if self.animacion == 1:
             if self.accion != 5:
                 self.accion += 1
