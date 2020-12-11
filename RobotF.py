@@ -19,7 +19,7 @@ class RobotVV(pygame.sprite.Sprite):
         self.animacion = 0
         self.velx = vel
         self.cooldown = 50
-        self.voltear = 10
+        self.voltear = 20
 
     
     def update(self, mov):
@@ -36,8 +36,9 @@ class RobotVV(pygame.sprite.Sprite):
 
         if self.voltear == 0:
             self.velx = - self.velx
-            self.voltear = 10
-            
+            self.voltear = 20
+        else:
+            self.voltear -=1
         self.image = self.imagenes[self.accion]
 
         if self.cooldown != 0:
@@ -49,5 +50,5 @@ class RobotVV(pygame.sprite.Sprite):
 
     def ponerMinas(self):
 
-        mm = Mina([self.rect.x + (self.rect.width/2) , self.rect.y + (self.rect.height)])
+        mm = Mina([self.rect.x + (self.rect.width/2) , self.rect.y])
         return mm
