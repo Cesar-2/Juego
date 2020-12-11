@@ -22,7 +22,7 @@ miTexto3 = miFuente.render("lo que tanto ha estado buscando, pero, con lo que é
 miTexto4 = miFuente.render("era con una compañia inesperada... los cuales eran los guardianes",0,BLANCO)
 miTexto5 = miFuente2.render("AQUI COMIENZA SU AVENTURA!!!",0,BLANCO)
  
-#fin = False
+#fin = Falsen
 def Cinematica1():
     '''audio.play()
     ventana.blit(fondo,(0,0))
