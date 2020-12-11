@@ -19,7 +19,7 @@ audio2 = pygame.mixer.Sound(os.path.join("IMG","nudo.mp3"))
 miFuente = pygame.font.SysFont("Times New Roman",20)
 miFuente2 = pygame.font.SysFont("Times New Roman",30)
 
-miTexto1 = miFuente.render("Al derrotar a Norza, Yondu obtuvo una gema",0,BLANCO,NEGRO)
+miTexto1 = miFuente.render("Al derrotar a los Nurxianos, Yondu obtuvo una gema",0,BLANCO,NEGRO)
 miTexto2 = miFuente.render("unica del cual, pensó que habia culminado su mision...",0,BLANCO,NEGRO)
 miTexto3 = miFuente.render("pero de la nada sin previo aviso un",0,BLANCO,NEGRO)
 miTexto4 = miFuente.render("un disparo sale de la nada en direccion a él",0,BLANCO,NEGRO)
@@ -69,10 +69,3 @@ def Cinematica2():
     pygame.time.wait(6000)
     audio2.stop()
     
-Cinematica2()
-
-while not fin:
-    
-    for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                fin = True
