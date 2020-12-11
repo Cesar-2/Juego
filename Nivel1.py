@@ -17,6 +17,7 @@ from pygame.locals import *
 from Explo import *
 from Robot import *
 from Abeja import *
+from FinalBoss import *
 
 width=100
 height=720
@@ -133,6 +134,7 @@ def juego(NumeroNivel):
     explos = pygame.sprite.Group()
     robots = pygame.sprite.Group()
     abejas = pygame.sprite.Group()
+    bosses = pygame.sprite.Group()
     musica = 0
     tiempoInicial = pygame.time.get_ticks()
     perdio = False
@@ -156,16 +158,16 @@ def juego(NumeroNivel):
             pygame.time.wait(2000)
 
         if nivel == 2:
-            uploadMap("jefe1")
-            musica = pygame.mixer.Sound("Musica3.wav")
+            uploadMap("mapa2")
+            musica = pygame.mixer.Sound("Musica2.wav")
             desplazamientoX = 100
             desplazamientoY = 1300
             pygame.display.flip()
             pygame.time.wait(2000)
         
         if nivel == 3:
-            uploadMap("mapa2")
-            musica = pygame.mixer.Sound("Musica2.wav")
+            uploadMap("mapa3")
+            musica = pygame.mixer.Sound("Musica3.wav")
             desplazamientoX = 100
             desplazamientoY = 1300
             info = imgNivel2.get_size()
@@ -173,11 +175,6 @@ def juego(NumeroNivel):
             pygame.display.flip()
             pygame.time.wait(2000)
             
-        if nivel == 4:
-            uploadMap("jefe2")
-            musica = pygame.mixer.Sound("Musica3.wav")
-            desplazamientoX = 100
-            desplazamientoY = 1300
     #---------------------------------------------------------------------------------------------
         musica.play(10)
         jugadores.add(jugador)
@@ -209,18 +206,23 @@ def juego(NumeroNivel):
                 elif minum == 5 :
                     b = Bloque([j*64,i*64],Bloque4)
                     bloques.add(b)
-                elif minum == 37:
+                elif minum == 38:
                     m = Mina([j*64,i*64])
                     minas.add(m)
-                elif minum == 38:
+                elif minum == 39:
                     t = Turret([j*64,i*64])
                     turrets.add(t)
-                elif minum == 39:
+                elif minum == 40:
                     r = Robot([j*64,i*64],20)
                     robots.add(r)
-                elif minum == 40:
+                elif minum == 41:
                     a = Abeja([j*64,i*64])
                     abejas.add(a)
+                elif minum == 43:
+                    bo = BossFinal([j*64,i*64])
+                    bosses.add(bo)
+                    g = Gema([j*64,i*64],imgGema)
+                    gemas.add(g)
                 elif i==0 and j ==0:
                     l = LimClass(j*64,i*64)
                     lim.add(l)
@@ -244,6 +246,7 @@ def juego(NumeroNivel):
         explos.update(temp1)
         robots.update(temp1)
         abejas.update(temp1,jugador.rect)
+        bosses.update(temp1)
 
         tiempoInicioNivel = pygame.time.get_ticks() - tiempoInicial
         cont = 0
@@ -267,12 +270,15 @@ def juego(NumeroNivel):
                 if cont % 25 == 0:
                     bala = t.shoot()
                     balas_enemies.add(bala)
+            for bo in bosses:
+                if cont % 30 == 0:
+                    abeja = bo.crear_abeja()
+                    abejas.add(abeja)
 
             jugador.bajar = False
             jugador.escalar = False
             jugador.escalando = False
             jugador.bajando = False
-
 
             ls = pygame.sprite.spritecollide(jugador,escaleras,False)
             if len(ls) > 0 :
@@ -295,6 +301,7 @@ def juego(NumeroNivel):
             explos.update(temp)
             robots.update(temp)
             abejas.update(temp,jugador.rect)
+            bosses.update(temp)
 
             ls = pygame.sprite.spritecollide(jugador,escaleras,False)
             if len(ls) > 0 :
@@ -315,6 +322,7 @@ def juego(NumeroNivel):
                     explos.update(temp)
                     robots.update(temp)
                     abejas.update(temp,jugador.rect)
+                    bosses.update(temp)
                     jugador.contGravedad = 0
                     break
                 if jugador.rect.bottom > e.rect.top and temp[1] > 0 and not jugador.bajando:
@@ -331,6 +339,7 @@ def juego(NumeroNivel):
                     explos.update(temp)
                     robots.update(temp)
                     abejas.update(temp,jugador.rect)
+                    bosses.update(temp)
                     jugador.salto = False
                     break
             
@@ -349,6 +358,7 @@ def juego(NumeroNivel):
                     explos.update(temp)
                     robots.update(temp)
                     abejas.update(temp,jugador.rect)
+                    bosses.update(temp)
                     break
                 elif jugador.rect.left < e.rect.right and temp[0] < 0:
                     temp = [(e.rect.right-jugador.rect.left),0]
@@ -363,6 +373,7 @@ def juego(NumeroNivel):
                     explos.update(temp)
                     robots.update(temp)
                     abejas.update(temp,jugador.rect)
+                    bosses.update(temp)
                     break
                     
             ls = pygame.sprite.spritecollide(jugador,robots,False)
@@ -382,6 +393,7 @@ def juego(NumeroNivel):
                     explos.update(temp)
                     robots.update(temp)
                     abejas.update(temp,jugador.rect)
+                    bosses.update(temp)
                     break
                 elif jugador.rect.left < e.rect.right:
                     jugador.health-=5
@@ -398,6 +410,7 @@ def juego(NumeroNivel):
                     explos.update(temp)
                     robots.update(temp)
                     abejas.update(temp,jugador.rect)
+                    bosses.update(temp)
                     break
 
             for b in bloques:
@@ -487,12 +500,16 @@ def juego(NumeroNivel):
                 screen.blit(r.image,r.rect)
             for a in abejas:
                 screen.blit(a.image,a.rect)
+            for bo in bosses:
+                bo.healthbar(screen)
+                screen.blit(bo.image,bo.rect)
             for e in explos:
                 if e.terminar == True:
                     explos.remove(e)
 
             screen.blit(jugador.imagen,jugador.rect)
             jugador.healthbar(screen)
+
             pygame.draw.rect(screen,white,(1000,3,200,50))
             pygame.draw.rect(screen,blueSelected,(1000,3,200,50),3)
             string = "                " +str(jugador.gemas) + "/" + str(gemasTotales)
