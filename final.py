@@ -70,4 +70,6 @@ def Cinematica3():
     pygame.time.wait(3000)
     ventana.blit(miTexto10,(1000,500))
     pygame.display.flip()
-
+    pygame.time.wait(8000)
+    audio.stop()
+    pass
